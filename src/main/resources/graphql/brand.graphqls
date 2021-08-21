@@ -1,0 +1,14 @@
+type Brand {
+    id: ID!
+    name: String!
+    code: String!
+}
+
+extend type Query {
+    findAllBrands: [Brand]!
+    findBrandById(id: String!): Brand!
+}
+
+extend type Mutation {
+    newBrand(name: String!, code: String!): Brand!
+}

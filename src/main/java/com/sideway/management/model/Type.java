@@ -26,7 +26,7 @@ public class Type {
     @Column(name = "subtype")
     private String subtype;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name = "TYPE_MODEL",
             joinColumns = @JoinColumn(name = "TYPE_id"),
             inverseJoinColumns = @JoinColumn(name = "MODEL_id"))

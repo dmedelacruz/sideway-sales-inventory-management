@@ -23,7 +23,7 @@ public class Category {
     @Column(name = "code", nullable = false)
     private String code;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name = "CATEGORY_TYPE",
             joinColumns = @JoinColumn(name = "CATEGORY_id"),
             inverseJoinColumns = @JoinColumn(name = "TYPE_id"))

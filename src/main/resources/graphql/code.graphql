@@ -1,0 +1,4 @@
+type Code {
+    id: ID!
+    value: String!
+}

@@ -4,6 +4,7 @@ import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Table(name = "model")
 @Entity
@@ -21,5 +22,11 @@ public class Model {
 
     @Column(name = "code", nullable = false)
     private String code;
+
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "MODEL_BRAND",
+            joinColumns = @JoinColumn(name = "MODEL_id"),
+            inverseJoinColumns = @JoinColumn(name = "BRAND_id"))
+    private List<Brand> brands;
 
 }

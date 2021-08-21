@@ -23,10 +23,4 @@ public class Brand {
     @Column(name = "code", nullable = false)
     private String code;
 
-    @ManyToMany
-    @JoinTable(name = "BRAND_CATEGORY",
-            joinColumns = @JoinColumn(name = "BRAND_id"),
-            inverseJoinColumns = @JoinColumn(name = "CATEGORY_id"))
-    private List<Category> categories;
-
 }
