@@ -1,0 +1,21 @@
+type Category {
+    id: ID!
+    code: String!
+    name: String!
+    types: [Type]
+}
+
+extend type Query {
+    findAllCategories(page: Int = 1, pageSize: Int = 10) : [Category]!
+    findCategoryById(id: String!): Category!
+    findCategoryByCode(code: String!): Category!
+    findCategoriesByName(name: String!): [Category]!
+}
+
+extend type Mutation {
+    newCategory(
+        code: String!,
+        name: String!,
+        types: [ID] = []
+    ): Category!
+}

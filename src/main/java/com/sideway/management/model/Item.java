@@ -1,21 +1,14 @@
 package com.sideway.management.model;
 
+import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
 @Table(name = "item")
 @Entity
-public class Item {
-
-    @Id
-    @GeneratedValue(generator = "hibernate-uuid")
-    @GenericGenerator(name = "hibernate-uuid", strategy = "uuid2")
-    @Column(name = "id", nullable = false)
-    private String id;
-
-    @Column(name = "code", nullable = false)
-    private String code;
+@Data
+public class Item extends BaseEntity {
 
     @Column(name = "description")
     private String description;
@@ -26,21 +19,17 @@ public class Item {
     @Column(name = "current_stock", nullable = false)
     private Integer currentStock;
 
-    @Column(name = "low_stock_threshold")
+    @Column(name = "low_stock_threshold", nullable = false)
     private Integer lowStockThreshold;
 
     @Transient
     private Boolean lowInStock;
 
     @Column(name = "capital", nullable = false)
-    private Double capital;
+    private Float capital;
 
     @Column(name = "recommended_selling_price", nullable = false)
-    private Double recommendedSellingPrice;
-
-    @ManyToOne
-    @JoinColumn(name = "brand_id")
-    private Brand brand;
+    private Float recommendedSellingPrice;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
@@ -49,6 +38,10 @@ public class Item {
     @ManyToOne
     @JoinColumn(name = "type_id")
     private Type type;
+
+    @ManyToOne
+    @JoinColumn(name = "brand_id")
+    private Brand brand;
 
     @ManyToOne
     @JoinColumn(name = "model_id")

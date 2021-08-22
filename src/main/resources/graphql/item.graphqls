@@ -1,0 +1,41 @@
+type Item {
+    id: ID!
+    code: String!
+    description: String
+    details: String
+    currentStock: Int!
+    lowStockThreshold: Int!
+    isLowInStock: Boolean!
+    capital: Float!
+    recommendedSellingPrice: Float!
+    category: Category
+    type: Type
+    brand: Brand
+}
+
+extend type Query {
+    findAllItems: [Item]!
+    findItemById(id: String): Item
+    findItemByCode(code: String): Item
+}
+
+extend type Mutation {
+
+    newItem(
+        code: String!,
+        description: String = "",
+        details: String = "",
+        currentStock: Int! = 0,
+        lowStockThreshold: Int! = 5,
+        capital: Float!,
+        recommendedSellingPrice: Float!,
+        category: ID = ""
+        type: ID = ""
+        brand: ID = ""
+    ): Item!
+
+    updateItemStock(
+        id: ID!
+        currentStock: Int!
+    ): Item!
+}
