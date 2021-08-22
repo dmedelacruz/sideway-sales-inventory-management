@@ -1,14 +1,21 @@
 type Brand {
     id: ID!
-    name: String!
     code: String!
+    name: String!
+    types: [Type]
 }
 
 extend type Query {
-    findAllBrands: [Brand]!
+    findAllBrands(page: Int = 1, pageSize: Int = 10): [Brand]!
     findBrandById(id: String!): Brand!
+    findBrandByCode(code: String): Brand!
+    findBrandsByName(name: String): [Brand]!
 }
 
 extend type Mutation {
-    newBrand(name: String!, code: String!): Brand!
+    newBrand(
+        code: String!,
+        name: String!,
+        types: [ID] = []
+    ): Brand!
 }

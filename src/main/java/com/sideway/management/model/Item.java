@@ -8,16 +8,7 @@ import javax.persistence.*;
 @Table(name = "item")
 @Entity
 @Data
-public class Item {
-
-    @Id
-    @GeneratedValue(generator = "hibernate-uuid")
-    @GenericGenerator(name = "hibernate-uuid", strategy = "uuid2")
-    @Column(name = "id", nullable = false, unique = true)
-    private String id;
-
-    @Column(name = "code", nullable = false, unique = true)
-    private String code;
+public class Item extends BaseEntity {
 
     @Column(name = "description")
     private String description;
@@ -28,7 +19,7 @@ public class Item {
     @Column(name = "current_stock", nullable = false)
     private Integer currentStock;
 
-    @Column(name = "low_stock_threshold")
+    @Column(name = "low_stock_threshold", nullable = false)
     private Integer lowStockThreshold;
 
     @Transient
@@ -41,24 +32,24 @@ public class Item {
     private Float recommendedSellingPrice;
 
     @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    @ManyToOne
+    @JoinColumn(name = "type_id")
+    private Type type;
+
+    @ManyToOne
     @JoinColumn(name = "brand_id")
     private Brand brand;
 
-//    @ManyToOne
-//    @JoinColumn(name = "category_id")
-//    private Category category;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "type_id")
-//    private Type type;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "model_id")
-//    private Model model;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "supplier_id")
-//    private Supplier supplier;
+    @ManyToOne
+    @JoinColumn(name = "model_id")
+    private Model model;
+
+    @ManyToOne
+    @JoinColumn(name = "supplier_id")
+    private Supplier supplier;
 
     @Transient
     public Boolean isLowInStock() {

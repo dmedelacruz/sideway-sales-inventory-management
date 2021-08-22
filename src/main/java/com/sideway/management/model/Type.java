@@ -1,5 +1,7 @@
 package com.sideway.management.model;
 
+import com.sideway.management.model.junctions.CategoryType;
+import com.sideway.management.model.junctions.TypeBrand;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -9,27 +11,18 @@ import java.util.List;
 @Table(name = "type")
 @Entity
 @Data
-public class Type {
-
-    @Id
-    @GeneratedValue(generator = "hibernate-uuid")
-    @GenericGenerator(name = "hibernate-uuid", strategy = "uuid2")
-    @Column(name = "id", nullable = false)
-    private String id;
+public class Type extends BaseEntity {
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "code", nullable = false)
-    private String code;
-
     @Column(name = "subtype")
-    private String subtype;
+    private String subType;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(name = "TYPE_MODEL",
-            joinColumns = @JoinColumn(name = "TYPE_id"),
-            inverseJoinColumns = @JoinColumn(name = "MODEL_id"))
-    private List<Model> models;
+    @OneToMany(mappedBy = "type", orphanRemoval = true, cascade = CascadeType.ALL)
+    private List<CategoryType> categories;
+
+    @OneToMany(mappedBy = "type", orphanRemoval = true, cascade = CascadeType.ALL)
+    private List<TypeBrand> brands;
 
 }

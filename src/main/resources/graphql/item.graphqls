@@ -5,8 +5,11 @@ type Item {
     details: String
     currentStock: Int!
     lowStockThreshold: Int!
+    isLowInStock: Boolean!
     capital: Float!
     recommendedSellingPrice: Float!
+    category: Category
+    type: Type
     brand: Brand
 }
 
@@ -20,13 +23,15 @@ extend type Mutation {
 
     newItem(
         code: String!,
-        description: String,
-        details: String,
-        currentStock: Int!,
-        lowStockThreshold: Int!,
+        description: String = "",
+        details: String = "",
+        currentStock: Int! = 0,
+        lowStockThreshold: Int! = 5,
         capital: Float!,
         recommendedSellingPrice: Float!,
-        brand: ID
+        category: ID = ""
+        type: ID = ""
+        brand: ID = ""
     ): Item!
 
     updateItemStock(

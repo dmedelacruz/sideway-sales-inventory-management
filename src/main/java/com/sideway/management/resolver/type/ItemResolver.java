@@ -3,7 +3,9 @@ package com.sideway.management.resolver.type;
 import com.coxautodev.graphql.tools.GraphQLResolver;
 import com.sideway.management.model.Brand;
 import com.sideway.management.model.Item;
+import com.sideway.management.model.Type;
 import com.sideway.management.repository.BrandRepository;
+import com.sideway.management.repository.TypeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 import org.springframework.stereotype.Service;
@@ -14,16 +16,11 @@ import javax.persistence.EntityNotFoundException;
 @RequiredArgsConstructor
 public class ItemResolver implements GraphQLResolver<Item> {
 
-    private final BrandRepository brandRepository;
-
     public Brand getBrand(Item item) {
-        final val brand = item.getBrand();
-        if(brand == null) {
-            return null;
-        } else {
-            return brandRepository.findById(brand.getId())
-                    .orElseThrow(() -> new EntityNotFoundException("No brand found"));
-        }
+        return item.getBrand();
     }
 
+    public Type getType(Item item) {
+        return item.getType();
+    }
 }

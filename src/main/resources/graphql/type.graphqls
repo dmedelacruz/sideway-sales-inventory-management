@@ -1,0 +1,27 @@
+type Type {
+    id: ID!
+    code: String!
+    name: String!
+    subType: String
+    categories: [Category]
+    brands: [Brand]
+}
+
+extend type Query {
+    findAllTypes(page: Int = 1, pageSize: Int = 10): [Type]!
+    findTypeById(id: String!): Type!
+    findTypeByCode(code: String!): Type!
+    findTypesByName(name: String!): [Type]!
+#    findTypesByCategory(category: ID): [Type]! TODO resolver implementation
+#    findTypesByBrand(brand: ID): [Type]! TODO resolver implementation
+}
+
+extend type Mutation {
+    newType(
+        code: String!,
+        name: String!,
+        subType: String = "",
+        categories: [ID] = []
+        brands: [ID] = []
+    ): Type!
+}

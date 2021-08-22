@@ -8,18 +8,18 @@ import javax.persistence.*;
 @Table(name = "supplier")
 @Entity
 @Data
-public class Supplier {
+public class Supplier extends BaseEntity {
 
-    @Id
-    @GeneratedValue(generator = "hibernate-uuid")
-    @GenericGenerator(name = "hibernate-uuid", strategy = "uuid2")
-    @Column(name = "id", nullable = false)
-    private String id;
+//    @Id
+//    @GeneratedValue(generator = "hibernate-uuid")
+//    @GenericGenerator(name = "hibernate-uuid", strategy = "uuid2")
+//    @Column(name = "id", nullable = false)
+//    private String id;
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "code", nullable = false)
-    private String code;
+//    @Column(name = "code", nullable = false)
+//    private String code;
 
 }

@@ -1,4 +1,0 @@
-type BaseEntity {
-    id: ID!
-    code: Code!
-}
