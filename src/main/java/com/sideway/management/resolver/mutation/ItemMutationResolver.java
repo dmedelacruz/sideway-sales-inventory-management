@@ -1,10 +1,7 @@
 package com.sideway.management.resolver.mutation;
 
 import com.sideway.management.model.Item;
-import com.sideway.management.repository.BrandRepository;
-import com.sideway.management.repository.CategoryRepository;
-import com.sideway.management.repository.ItemRepository;
-import com.sideway.management.repository.TypeRepository;
+import com.sideway.management.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 import org.springframework.stereotype.Service;
@@ -19,6 +16,7 @@ public class ItemMutationResolver extends MutationResolver {
     private final CategoryRepository categoryRepository;
     private final TypeRepository typeRepository;
     private final BrandRepository brandRepository;
+    private final ModelRepository modelRepository;
 
     public Item newItem(
             String code,
@@ -30,7 +28,8 @@ public class ItemMutationResolver extends MutationResolver {
             Float recommendedSellingPrice,
             String categoryId,
             String typeId,
-            String brandId
+            String brandId,
+            String modelId
     ) {
         Item item = new Item();
         item.setCode(code);
@@ -63,6 +62,13 @@ public class ItemMutationResolver extends MutationResolver {
             final val brand = brandRepository.findById(brandId)
                     .orElseThrow(() -> new EntityNotFoundException("No Brand found for given ID"));
             item.setBrand(brand);
+        }
+
+        if(modelId != null && !modelId.isBlank()) {
+            final val model = modelRepository.findById(modelId).orElse(null);
+            item.setModel(model);
+        } else {
+            item.setModel(null);
         }
 
 

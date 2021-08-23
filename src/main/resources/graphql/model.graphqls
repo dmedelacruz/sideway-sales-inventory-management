@@ -1,0 +1,17 @@
+type Model {
+    id: ID!
+    code: String!
+    name: String!
+}
+
+extend type Query {
+    findAllModels(page: Int = 1, pageSize: Int = 10) : [Model]!
+    findModelById(id: String!): Model!
+    findModelByCode(code: String!): Model!
+    findModelByName(name: String!): Model!
+}
+
+extend type Mutation {
+    newModel(code: String!, name: String!): Model!
+}
+

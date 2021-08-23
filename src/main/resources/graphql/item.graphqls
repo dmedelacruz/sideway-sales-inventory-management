@@ -11,6 +11,7 @@ type Item {
     category: Category
     type: Type
     brand: Brand
+    model: Model
 }
 
 extend type Query {
@@ -32,6 +33,7 @@ extend type Mutation {
         category: ID = ""
         type: ID = ""
         brand: ID = ""
+        model: ID = ""
     ): Item!
 
     updateItemStock(
